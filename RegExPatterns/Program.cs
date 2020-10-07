@@ -48,6 +48,19 @@ namespace RegExPatterns
             {
                 Console.WriteLine("Phone Number: " + number);
             }
+            RegStart5:
+            Console.WriteLine("Enter Password(should contain minimum 8 characters");
+            string password = Console.ReadLine();
+            check = p.ValidatePassword(password);
+            if (check == false)
+            {
+                Console.WriteLine("Enter Valid password");
+                goto RegStart5;
+            }
+            else
+            {
+                Console.WriteLine("Password: " + password);
+            }
         }
     }
 }
