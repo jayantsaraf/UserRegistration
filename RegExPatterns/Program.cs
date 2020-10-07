@@ -35,6 +35,19 @@ namespace RegExPatterns
             {
                 Console.WriteLine("Last Name: " + lName);
             }
+            RegStart3:
+            Console.WriteLine("Enter Email Address(should be in the format abc.xyz@bl.co.in where xyz and in are optional)");
+            string email = Console.ReadLine();
+            check = p.ValidateEmail(email);
+            if (check == false)
+            {
+                Console.WriteLine("Enter Valid phone number");
+                goto RegStart3;
+            }
+            else
+            {
+                Console.WriteLine("Email Address: " + email);
+            }
             RegStart4:
             Console.WriteLine("Enter Mobile Number(should start with country pincode and contain 10 numbers)");
             string number = Console.ReadLine();
