@@ -10,7 +10,7 @@ namespace RegExPatterns
         public static string REGEX_FIRST_NAME = "^[A-Z][a-z]{3,}?";
         public static string REGEX_LAST_NAME = "^[A-Z][a-z]{3,}?";
         public static string REGEX_MOBILE = "^[1-9]{2}[1-9][0-9]{9}?";
-        public static string REGEX_PASSWORD = ".{8,}?";       
+        public static string REGEX_PASSWORD = "[A-Z]{1,}?.{8,}?";       
         public bool ValidateFirstName(string first)
         {
             return Regex.IsMatch(first, REGEX_FIRST_NAME);
