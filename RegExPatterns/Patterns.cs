@@ -9,6 +9,8 @@ namespace RegExPatterns
     {
         public static string REGEX_FIRST_NAME = "^[A-Z][a-z]{3,}?";
         public static string REGEX_LAST_NAME = "^[A-Z][a-z]{3,}?";
+        public static string REGEX_MOBILE = "^[1-9]{2}[1-9][0-9]{9}?";
+
         public bool ValidateFirstName(string first)
         {
             return Regex.IsMatch(first, REGEX_FIRST_NAME);
@@ -16,6 +18,10 @@ namespace RegExPatterns
         public bool ValidateLastName(string last)
         {
             return Regex.IsMatch(last, REGEX_LAST_NAME);
+        }
+        public bool ValidatePhone(string number)
+        {
+            return Regex.IsMatch(number, REGEX_MOBILE);
         }
     }
 }

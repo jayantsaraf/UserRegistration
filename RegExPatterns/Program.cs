@@ -33,7 +33,20 @@ namespace RegExPatterns
             }
             else
             {
-                Console.WriteLine("Last Name: " + fName);
+                Console.WriteLine("Last Name: " + lName);
+            }
+            RegStart4:
+            Console.WriteLine("Enter Mobile Number(should start with country pincode and contain 10 numbers)");
+            string number = Console.ReadLine();
+            check = p.ValidatePhone(number);
+            if (check == false)
+            {
+                Console.WriteLine("Enter Valid phone number");
+                goto RegStart4;
+            }
+            else
+            {
+                Console.WriteLine("Phone Number: " + number);
             }
         }
     }
