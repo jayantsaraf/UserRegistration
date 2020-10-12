@@ -43,5 +43,19 @@ namespace UserRegistrationTest
             }
             Assert.AreEqual("Validation Unsuccessful", message);
         }
+        [TestMethod]
+        public void MultipleMail()
+        {
+            string message = null;
+            Patterns user = new Patterns();
+            bool check1 = user.ValidateEmail("abc@yahoo.com");
+            bool check2 = user.ValidateEmail("abc-100@yahoo.com");
+            bool check3 = user.ValidateEmail("abc.100@yahoo.com");
+            if (check1 == true && check2 == true && check3 == true)
+            {
+                message = "Email Validation Successful";
+            }
+            Assert.AreEqual("Email Validation Successful", message);
+        }
     }
 }
