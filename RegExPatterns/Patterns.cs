@@ -9,7 +9,7 @@ namespace RegExPatterns
     {
         public static string REGEX_FIRST_NAME = "^[A-Z][a-z]{3,}?";
         public static string REGEX_LAST_NAME = "^[A-Z][a-z]{3,}?";
-        public static string REGEX_EMAIL = "[a-zA-Z0-9]{3,}[+-.]?[a-zA-Z0-9]{0,}@[a-z]{2,}[.][a-z]{2,}[a-z]{0,}";
+        public static string REGEX_EMAIL = "^[a-z0-9A-Z]+([._+-][a-z0-9A-Z]+)*[@][a-z0-9A-Z]+[.][a-zA-Z]{2,3}(.[a-zA-Z]{2})?$";
         public static string REGEX_MOBILE = "^[1-9]{2}[1-9][0-9]{9}?";
         public static string REGEX_PASSWORD = "(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%&()!+-]).{8,}?";
         public bool ValidateFirstName(string first)

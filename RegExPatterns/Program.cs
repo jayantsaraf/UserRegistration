@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
 namespace RegExPatterns
@@ -41,7 +42,7 @@ namespace RegExPatterns
             check = p.ValidateEmail(email);
             if (check == false)
             {
-                Console.WriteLine("Enter Valid phone number");
+                Console.WriteLine("Enter Valid email address");
                 goto RegStart3;
             }
             else
