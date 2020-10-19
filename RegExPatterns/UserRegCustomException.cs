@@ -18,7 +18,8 @@ namespace UserRegistration
             NO_SUCH_FIELD,
             NO_SUCH_METHOD = 12,
             NO_SUCH_CLASS,
-            OBJECT_CREATION_ISSUE
+            OBJECT_CREATION_ISSUE,
+            STRING_LENGTH_NOT_MATCHED
         }
         private readonly ExceptionType type;
         public UserRegCustomException(ExceptionType Type, String message) : base(message)

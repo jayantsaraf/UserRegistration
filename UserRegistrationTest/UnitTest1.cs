@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RegExPatterns;
+using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UserRegistration;
 
@@ -9,208 +10,177 @@ namespace UserRegistrationTest
     public class UnitTest1
     {
         [TestMethod]
-        public void HappyTest()
-        {
-            string message = null;
-            Patterns user = new Patterns();
-            bool check1 = user.ValidateFirstName("Jayant");
-            bool check2 = user.ValidateLastName("Saraf");
-            bool check3 = user.ValidateEmail("sarafjayant24@gmail.com");
-            bool check4 = user.ValidatePhone("918017126325");
-            bool check5 = user.ValidatePassword("Saraf@24");
-            if(check1==true && check2==true && check3 == true && check4 == true && check5 == true)
-            {
-                message = "Validation Successful";
-            }
-            Assert.AreEqual("Validation Successful", message);
-        }
-        [TestMethod]
-        public void SadTest()
-        {
-            string message = null;
-            Patterns user = new Patterns();
-            bool check1 = user.ValidateFirstName("jayant");
-            bool check2 = user.ValidateLastName("saraf");
-            bool check3 = user.ValidateEmail("sarafjayant24gmail.com");
-            bool check4 = user.ValidatePhone("8017126325");
-            bool check5 = user.ValidatePassword("raf@24");
-            if (check1 == true && check2 == true && check3 == true && check4 == true && check5 == true)
-            {
-                message = "Validation Successful";
-            }
-            else
-            {
-                message = "Validation Unsuccessful";
-            }
-            Assert.AreEqual("Validation Unsuccessful", message);
-        }
-        [TestMethod]
-        public void MultipleMail()
-        {
-            string message = null;
-            Patterns user = new Patterns();
-            bool check1 = user.ValidateEmail("abc@yahoo.com");
-            bool check2 = user.ValidateEmail("abc-100@yahoo.com");
-            bool check3 = user.ValidateEmail("abc.100@yahoo.com");
-            if (check1 == true && check2 == true && check3 == true)
-            {
-                message = "Email Validation Successful";
-            }
-            Assert.AreEqual("Email Validation Successful", message);
-        }
-        [TestMethod]
-        public void given_empty_first_name_should_return_this_exception()
-        {
-            try
-            {
-                Patterns user = new Patterns();
-                string message = string.Empty;
-                bool check = user.ValidateFirstName(message);
+        [DataRow("Jayant")]
 
-            }
-            catch(UserRegCustomException u)
-            {
-                Assert.AreEqual("Fist Name cannot be empty", u.message);
-            }
-
-        }
-        public void given_null_first_name_should_return_this_exception()
+        public void GIVEN_FIRST_NAME_SHOULD_RETURN_FIRST_NAME(string fName)
         {
-            try
-            {
-                Patterns user = new Patterns();
-                string message = null;
-                bool check = user.ValidateFirstName(message);
+            ////Arrange
+            Patterns User = new Patterns();
+            List<string> firstName = new List<string>() { fName };
+            bool expected = true;
 
-            }
-            catch (UserRegCustomException u)
-            {
-                Assert.AreEqual("Fist Name cannot be null", u.message);
-            }
+            ////Act
+            bool actual = User.ValidateFirstName(firstName);
+
+            ////Assert
+            Assert.AreEqual(expected, actual);
 
         }
         [TestMethod]
-        public void given_empty_last_name_should_return_this_exception()
+        [DataRow("Sam")]
+        [DataRow("Saraf")]
+        public void GIVEN_FIRST_NAME_SHOULD_RETURN_ERRORS(string fName)
         {
-            try
-            {
-                Patterns user = new Patterns();
-                string message = string.Empty;
-                bool check = user.ValidateLastName(message);
+            ////Arrange
+            Patterns User = new Patterns();
+            List<string> firstName = new List<string>() { fName };
+            bool expected = false;
 
-            }
-            catch (UserRegCustomException u)
-            {
-                Assert.AreEqual("Last Name cannot be empty", u.message);
-            }
+            ////Act
+            bool actual = User.ValidateFirstName(firstName);
 
-        }
-        public void given_null_last_name_should_return_this_exception()
-        {
-            try
-            {
-                Patterns user = new Patterns();
-                string message = null;
-                bool check = user.ValidateLastName(message);
-
-            }
-            catch (UserRegCustomException u)
-            {
-                Assert.AreEqual("Last Name cannot be null", u.message);
-            }
+            ////Assert
+            Assert.AreEqual(expected, actual);
 
         }
         [TestMethod]
-        public void given_empty_email_should_return_this_exception()
+        [DataRow("Saraf")]
+        public void GIVEN_Last_NAME_SHOULD_RETURN_LAST_NAME(string lName)
         {
-            try
-            {
-                Patterns user = new Patterns();
-                string message = string.Empty;
-                bool check = user.ValidateEmail(message);
+            ////Arrange
+            Patterns User = new Patterns();
+            List<string> lastName = new List<string>() { lName };
+            bool expected = true;
 
-            }
-            catch (UserRegCustomException u)
-            {
-                Assert.AreEqual("Email cannot be empty", u.message);
-            }
+            ////Act
+            bool actual = User.ValidateLastName(lastName);
 
-        }
-        public void given_null_email_should_return_this_exception()
-        {
-            try
-            {
-                Patterns user = new Patterns();
-                string message = null;
-                bool check = user.ValidateEmail(message);
-
-            }
-            catch (UserRegCustomException u)
-            {
-                Assert.AreEqual("Email cannot be null", u.message);
-            }
+            ////Assert
+            Assert.AreEqual(expected, actual);
 
         }
         [TestMethod]
-        public void given_empty_phone_should_return_this_exception()
+        [DataRow("Sharaf")]
+        [DataRow("sharaf")]
+        [DataRow("Sh1araf")]
+        public void GIVEN_Last_NAME_SHOULD_RETURN_ERROR(string lName)
         {
-            try
-            {
-                Patterns user = new Patterns();
-                string message = string.Empty;
-                bool check = user.ValidatePhone(message);
+            ////Arrange
+            Patterns User = new Patterns();
+            List<string> lastName = new List<string>() { lName };
+            bool expected = false;
 
-            }
-            catch (UserRegCustomException u)
-            {
-                Assert.AreEqual("Phone number cannot be empty", u.message);
-            }
+            ////Act
+            bool actual = User.ValidateLastName(lastName);
 
-        }
-        public void given_null_phone_should_return_this_exception()
-        {
-            try
-            {
-                Patterns user = new Patterns();
-                string message = null;
-                bool check = user.ValidatePhone(message);
-
-            }
-            catch (UserRegCustomException u)
-            {
-                Assert.AreEqual("Phone number cannot be null", u.message);
-            }
+            ////Assert
+            Assert.AreEqual(expected, actual);
 
         }
         [TestMethod]
-        public void given_empty_password_should_return_this_exception()
+        [DataRow("shah1998@gmail.com")]
+        [DataRow("jayant@gmail.co.in")]
+        public void GIVEN_EMAIL_ID_SHOULD_RETURN_EMAIL_ID(string email)
         {
-            try
-            {
-                Patterns user = new Patterns();
-                string message = string.Empty;
-                bool check = user.ValidatePassword(message);
+            ////Arrange
+            Patterns User = new Patterns();
+            List<string> emailAddress = new List<string>() { email };
+            bool expected = true;
 
-            }
-            catch (UserRegCustomException u)
-            {
-                Assert.AreEqual("Password cannot be empty", u.message);
-            }
+            ////Act
+            bool actual = User.ValidateEmail(emailAddress);
+
+            ////Assert
+            Assert.AreEqual(expected, actual);
 
         }
-        public void given_null_password_should_return_this_exception()
+        [TestMethod]
+        [DataRow("sarafjayant1998@gmail.co@@")]
+        [DataRow("SaWI..SHAH@gmail.com")]
+        public void GIVEN_EMAIL_ID_SHOULD_RETURN_ERROR(string email)
         {
-            try
-            {
-                Patterns user = new Patterns();
-                string message = null;
-                bool check = user.ValidatePassword(message);
+            ////Arrange
+            Patterns User = new Patterns();
+            List<string> emailAddress = new List<string>() { email };
+            bool expected = false;
 
-            }
-            catch (UserRegCustomException u)
-            {
-                Assert.AreEqual("Password cannot be null", u.message);
-            }
+            ////Act
+            bool actual = User.ValidateEmail(emailAddress);
+
+            ////Assert
+            Assert.AreEqual(expected, actual);
+
+        }
+        [TestMethod]
+        [DataRow("919163572895")]
+        [DataRow("916263572895")]
+        public void GIVEN_MOBILE_NUMBER_SHOULD_RETURN_MOBILE_NUMBER(string mobilenumber)
+        {
+            ////Arrange
+            Patterns User = new Patterns();
+            List<string> phoneNumber = new List<string>() { mobilenumber };
+            bool expected = true;
+
+            ////Act
+            bool actual = User.ValidatePhone(phoneNumber);
+
+            ////Assert
+            Assert.AreEqual(expected, actual);
+
+        }
+        [TestMethod]
+        [DataRow("9163572894")]
+        [DataRow("12812458098")]
+        [DataRow("916@572895")]
+
+
+        public void GIVEN_MOBILE_NUMBER_SHOULD_RETURN_ERROR(string mobilenumber)
+        {
+            ////Arrange
+            Patterns User = new Patterns();
+            List<string> phoneNumber = new List<string>() { mobilenumber };
+            bool expected = false;
+
+            ////Act
+            bool actual = User.ValidatePhone(phoneNumber);
+
+            ////Assert
+            Assert.AreEqual(expected, actual);
+
+        }
+        [TestMethod]
+        [DataRow("Tajmahal1!")]
+
+        public void GIVEN_PASSWORD_SHOULD_RETURN_PASSWORD(string password)
+        {
+            ////Arrange
+            Patterns User = new Patterns();
+            List<string> passWord = new List<string>() { password };
+            bool expected = true;
+
+            ////Act
+            bool actual = User.ValidatePassword(passWord);
+
+            ////Assert
+            Assert.AreEqual(expected, actual);
+
+        }
+        [TestMethod]
+        [DataRow("Saraf")]
+        [DataRow("Saraf1!")]
+
+        public void GIVEN_PASSWORD_SHOULD_RETURN_ERROR(string password)
+        {
+            ////Arrange
+            Patterns User = new Patterns();
+            List<string> passWord = new List<string>() { password };
+            bool expected = false;
+
+            ////Act
+            bool actual = User.ValidatePassword(passWord);
+
+            ////Assert
+            Assert.AreEqual(expected, actual);
 
         }
 
