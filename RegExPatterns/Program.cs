@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using System.Transactions;
+using UserRegistration;
 
 namespace RegExPatterns
 {
@@ -13,67 +17,68 @@ namespace RegExPatterns
             RegStart1:
             Console.WriteLine("Enter First Name(should start with capital letter and contain minimum 3 characters");
             string fName = Console.ReadLine();
-            bool check = p.ValidateFirstName(fName);
-            if(check==false)
-            {
-                Console.WriteLine("Enter Valid First Name");
-                goto RegStart1;
-            }
-            else
+            List<string> firstName = new List<string> { fName };
+            bool check = p.ValidateFirstName(firstName);
+            if (check==true)
             {
                 Console.WriteLine("First Name: " + fName);
             }
+            else
+            {
+                goto RegStart1;
+            }
+
             RegStart2:
             Console.WriteLine("Enter Last Name(should start with capital letter and contain minimum 3 characters");
             string lName = Console.ReadLine();
-            check = p.ValidateLastName(lName);
-            if (check == false)
+            List<string> lastName = new List<string> { lName };
+            check = p.ValidateLastName(lastName);
+            if (check==true)
             {
-                Console.WriteLine("Enter Valid First Name");
-                goto RegStart2;
+                Console.WriteLine("Last Name: " + lName);
             }
             else
             {
-                Console.WriteLine("Last Name: " + lName);
+                goto RegStart2;
             }
             RegStart3:
             Console.WriteLine("Enter Email Address(should be in the format abc.xyz@bl.co.in where xyz and in are optional)");
             string email = Console.ReadLine();
-            check = p.ValidateEmail(email);
-            if (check == false)
-            {
-                Console.WriteLine("Enter Valid email address");
-                goto RegStart3;
-            }
-            else
+            List<string> emailAddress = new List<string> { email };
+            check = p.ValidateEmail(emailAddress);
+            if (check==true)
             {
                 Console.WriteLine("Email Address: " + email);
+            }
+            else
+            {               
+                goto RegStart3;
             }
             RegStart4:
             Console.WriteLine("Enter Mobile Number(should start with country pincode and contain 10 numbers)");
             string number = Console.ReadLine();
-            check = p.ValidatePhone(number);
-            if (check == false)
+            List<string> phoneNumber = new List<string> { number };
+            check = p.ValidatePhone(phoneNumber);
+            if (check==true)
             {
-                Console.WriteLine("Enter Valid phone number");
-                goto RegStart4;
+                Console.WriteLine("Phone Number: " + number);
             }
             else
             {
-                Console.WriteLine("Phone Number: " + number);
+                goto RegStart4;
             }
             RegStart5:
             Console.WriteLine("Enter Password(should contain minimum 8 characters");
             string password = Console.ReadLine();
-            check = p.ValidatePassword(password);
-            if (check == false)
+            List<string> passWord = new List<string> { password };
+            check = p.ValidatePassword(passWord);
+            if (check == true)
             {
-                Console.WriteLine("Enter Valid password");
-                goto RegStart5;
+                Console.WriteLine("Password: " + password);                
             }
             else
             {
-                Console.WriteLine("Password: " + password);
+                goto RegStart5;
             }
         }
     }
